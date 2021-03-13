@@ -6,8 +6,10 @@ import { sleepAsync } from "./utils";
 
 const app = express();
 
+const PORT = Number(process.argv[2]) || 3000;
+
 const instance = axios.create({
-    baseURL: "http://localhost:3001",
+    baseURL: `http://localhost:${PORT + 1}`,
 });
 
 const auth = new Auth(instance);
@@ -37,4 +39,8 @@ app.use("/", (req, res) => {
     res.json({ hello: "world" });
 });
 
-app.listen(3000);
+app.listen(PORT, null as any, () => {
+    console.log("==================================");
+    console.log(`Listening on port: ${PORT}`);
+    console.log("==================================");
+});

@@ -33,4 +33,10 @@ app.post("/verify-user", jsonParser, (req, res) => {
     }, 1000);
 });
 
-app.listen(3001);
+const PORT = Number(process.argv[2]) || 3001;
+
+app.listen(PORT, null as any, () => {
+    console.log("==================================");
+    console.log(`Listening on port: ${PORT}`);
+    console.log("==================================");
+});
